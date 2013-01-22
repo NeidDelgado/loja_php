@@ -1,0 +1,78 @@
+/* 
+    Document   : style_admin.css
+    Created on : 15/Jan/2013, 14:37:39
+    Author     : Neid Delgado
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+   font-family: Verdana, sans-serif;
+}
+.wrapper {
+    border: 1px solid red;
+}
+
+.header {
+    border: 1px solid blue;    
+}
+
+.content {
+    border: 1px solid green;
+}
+
+.footer {
+    border: 1px solid blue;    
+}
+
+
+.menu_principal {
+    list-style: none;
+    border: 1px solid #FF4500;
+    margin: 10px;
+    padding: 5px;
+    width: 700px;
+    height: 30px;
+}
+
+.menu_principal li {
+    float: left;
+    margin-right: 5px;
+    background-color: #BCD2EE;
+    padding: 5px;
+}
+
+.menu_principal li a {
+    text-decoration: none;
+}
+
+
+/* MENSAGENS DE ERROR */
+.msg_error {
+    border: 1px solid red;
+    background-color: #FF4500;
+    width: 600px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.msg_ok {
+    border: 1px solid red;
+    background-color: greenyellow;
+    width: 600px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+
+/* FORMULÁRIOS */
+form fieldset {
+    width: 400px;
+    margin: 0 auto;
+}
+form p {
+    text-align: right;
+}
+
+form p input {
+    width: 250px;
+}
