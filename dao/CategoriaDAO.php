@@ -39,23 +39,24 @@ class CategoriaDAO extends Categoria {
     
     public static function deleteCategoria($id){
         $conexao = new ConexaoDAO();
-      
+        
          // selecionar todas os produtos 
-        $sql2 ="SELECT *FROM produtos WHERE id =:id";
-        $resulta = $conexao->query($sql2)->fetchAll();
-        return $resulta;  
-        
-           header("Location: index.php?login=false");
-            die();
-        
+        $sql2 ="SELECT *FROM produtos WHERE id_categoria = '{$id}'";
+        $resulta = $conexao->query($sql2)->fetchAll();  
+
         $sqlText = "DELETE FROM categorias WHERE id = :id";
-        
+
         $exec = $conexao->prepare($sqlText);
         $exec->bindValue(':id', $id);
-        
+
         $resultado = $exec->execute();
         return $resultado;
+        }
+        
+      
     }
+    
+    
     
     
     public static function editarCategoria(Categoria $categoria){
