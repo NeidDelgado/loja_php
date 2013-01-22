@@ -86,19 +86,47 @@
                 </fieldset>
             </form>
             <?php
+        } else if ($action == "eliminar"){
+            $id = trim($_GET['id']);
+            $categoria = CategoriaDAO::deleteCategoria($id);
+            if ($categoria){                
+                header("Location: categorias.php?status=dok");
+            } else {
+                header("Location: categorias.php?status=derro");
+            }
+        } else if ($action == "editar"){
+            $id = trim($_GET['id']);
+            $cat = CategoriaDAO::getCategoria($id);
+            
+            if (!$cat){
+                header("Location: categorias.php");
+            }
+            
+            var_dump($cat['nome']);
+            ?>
+            <form action="" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Actualizar Categoria</legend>
+                    <p>
+                        <label>Nome:</label>
+                        <input type="text" name="nome" placeholder="Nome da Categoria" value="<?php echo $cat['nome']; ?>">
+                    </p>
+                    <p>
+                        <label>Descriação:</label>
+                        <input type="text" name="descricao" placeholder="Descrição da Categoria" value="<?php echo $cat['descricao']; ?>">
+                    </p>
+                    <p>
+                        <label>Imagem:</label>
+                        <input type="file" name="imagem">
+                    </p>
+                    <p>
+                        <input type="submit" name="gravar" value="Actualizar" style="width: 100px;">
+                    </p>
+                </fieldset>
+            </form>
+            <?php
         }
     ?>
-    
-    <?php
-     if ($action == 'eliminar'){
-         
-        $msg = "A categoria não pode ser eliminada!";
-        if (isset($_GET['categoria']) == 'false'){
-        echo '<label style="margin-left: 50px; font-size: 12px; color: red; font-weight: bold;">'
-        .$msg.'</label>';
-        }
-     }
-    ?>  
 </div>
 
 <?php

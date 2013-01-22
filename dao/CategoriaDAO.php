@@ -1,11 +1,27 @@
 <?php
 
 class CategoriaDAO extends Categoria {
-    
+    /**
+     * Retorna uma categoria
+     * 
+     * @param integer $id     * 
+     * @return Categoria
+     */
     public static function getCategoria($id){
+        $conexao = new ConexaoDAO();
+        
+        $sqlText = "SELECT * FROM categorias WHERE id = {$id}";
+        $cat = $conexao->query($sqlText)->fetch();
+        
+        return $cat;
         
     }
     
+    /**
+     * Retorna todas as categorias
+     * 
+     * @return array
+     */
     public static function getCategorias(){
         $conexao = new ConexaoDAO();
         
@@ -40,22 +56,21 @@ class CategoriaDAO extends Categoria {
     public static function deleteCategoria($id){
         $conexao = new ConexaoDAO();
         
-         // selecionar todas os produtos 
-        $sql2 ="SELECT *FROM produtos WHERE id_categoria = '{$id}'";
-        $resulta = $conexao->query($sql2)->fetchAll();  
-
-        $sqlText = "DELETE FROM categorias WHERE id = :id";
-
-        $exec = $conexao->prepare($sqlText);
-        $exec->bindValue(':id', $id);
-
-        $resultado = $exec->execute();
-        return $resultado;
+        // Verificar se não existe produtos na categoria em questão
+        $sqlText = "SELECT * FROM produtos WHERE id_categoria = {$id}";
+        $cat = $conexao->query($sqlText)->fetchAll();
+        if (empty($cat)){            
+            $sqlText = "DELETE FROM categorias WHERE id = :id";
+            $exec = $conexao->prepare($sqlText);
+            $exec->bindValue(":id", $id);
+            
+            $resultado = $exec->execute();
+            
+            return $resultado;
         }
         
-      
-    }
-    
+        return false;
+    }   
     
     
     

@@ -11,6 +11,16 @@
 <div class="content">
     <h1>Categorias</h1>
     
+    <?php
+        if (isset($_GET['status']) && $_GET['status'] == "dok"){
+            echo "<div class='msg_ok'>Categoria eliminada.</div>";
+        }
+        
+         if (isset($_GET['status']) && $_GET['status'] == "derro"){
+            echo "<div class='msg_error'>Não foi possivél eliminar a Categoria.</div>";
+        }
+    ?>
+    
     <a href="categoria.php?action=novo">Nova Categoria</a>
     <table border="1">
         <thead>
