@@ -59,14 +59,21 @@ class CategoriaDAO extends Categoria {
         // Verificar se não existe produtos na categoria em questão
         $sqlText = "SELECT * FROM produtos WHERE id_categoria = {$id}";
         $cat = $conexao->query($sqlText)->fetchAll();
-        if (empty($cat)){            
+        if (empty($cat)){   
+            $cat = self::getCategoria($id);
+            $img = PASTA_IMG_CATEGORIA . $cat['url_imagem'];            
+           
             $sqlText = "DELETE FROM categorias WHERE id = :id";
             $exec = $conexao->prepare($sqlText);
             $exec->bindValue(":id", $id);
             
             $resultado = $exec->execute();
-            
-            return $resultado;
+            if ($resultado){
+                if ($cat['url_imagem'] != "sem_imagem.png"){
+                    unlink($img);
+                }
+                return $resultado;
+            }
         }
         
         return false;

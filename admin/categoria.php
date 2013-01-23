@@ -6,7 +6,6 @@
     }
     
     require_once 'header.php';
-   
     
     if (isset($_GET['action'])){
         $action = strtolower(trim($_GET['action']));
@@ -89,6 +88,7 @@
         } else if ($action == "eliminar"){
             $id = trim($_GET['id']);
             $categoria = CategoriaDAO::deleteCategoria($id);
+            
             if ($categoria){                
                 header("Location: categorias.php?status=dok");
             } else {
@@ -102,7 +102,6 @@
                 header("Location: categorias.php");
             }
             
-            var_dump($cat['nome']);
             ?>
             <form action="" method="post" enctype="multipart/form-data">
                 <fieldset>
