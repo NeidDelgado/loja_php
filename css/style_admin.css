@@ -63,10 +63,21 @@ body {
     padding: 5px;
 }
 
+.titulo{
+    font-size: 14px;
+    color: navy;
+    margin-left: 40px;
+    font-weight: bold;
+}
+.texto{
+    font-size: 12px;
+    color:black;
+    margin-left: 60px;
+}
 
 /* FORMULÁRIOS */
 form fieldset {
-    width: 400px;
+    width: 410px;
     margin: 0 auto;
 }
 form p {

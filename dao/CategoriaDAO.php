@@ -16,7 +16,6 @@ class CategoriaDAO extends Categoria {
         return $cat;
         
     }
-    
     /**
      * Retorna todas as categorias
      * 
@@ -31,7 +30,6 @@ class CategoriaDAO extends Categoria {
         
         return $resultado;
     }
-    
     /**
      * 
      * @param Categoria $categoria
@@ -39,7 +37,8 @@ class CategoriaDAO extends Categoria {
     public static function saveCategoria(Categoria $categoria){
         $conexao = new ConexaoDAO();
         
-        $sqlText = "INSERT INTO categorias (nome, descricao, categoria_id, url_imagem, data_criacao, data_alteracao) VALUES (:nome, :descricao, :categoria_id, :url_imagem, :data_criacao, :data_alteracao)";
+        $sqlText = "INSERT INTO categorias (nome, descricao, categoria_id, url_imagem, data_criacao, data_alteracao) 
+            VALUES (:nome, :descricao, :categoria_id, :url_imagem, :data_criacao, :data_alteracao)";
         $exec = $conexao->prepare($sqlText);
         $exec->bindValue(':nome', $categoria->getNome());
         $exec->bindValue(':descricao', $categoria->getDescricao());
@@ -79,18 +78,17 @@ class CategoriaDAO extends Categoria {
         return false;
     }   
     
-    
-    
     public static function editarCategoria(Categoria $categoria){
         $conexao = new ConexaoDAO();
         
-        $sqlText ="UPDATE categorias SET nome=:nome, descricao=:descricao,  categoria_id=:categoria_id, url_imagem=:url_imagem, data_alteracao=:data_alteracao WHERE id = '{$id}'";
+        $sqlText ="UPDATE categorias SET nome=:nome, descricao=:descricao,  categoria_id=:categoria_id, url_imagem=:url_imagem, data_alteracao=:data_alteracao WHERE id = :id";
         $exec = $conexao->prepare($sqlText);
         $exec->bindValue(':nome', $categoria->getNome());
         $exec->bindValue(':descricao', $categoria->getDescricao());
         $exec->bindValue(':categoria_id', $categoria->getCategoriaId());
         $exec->bindValue(':url_imagem', $categoria->getUrlImagem());
         $exec->bindValue(':data_alteracao', $categoria->getDataAlteracao());
+        $exec->bindValue(':id', $categoria->getId());
         
         $resultado = $exec->execute();
         

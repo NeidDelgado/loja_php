@@ -14,7 +14,6 @@ class Helper {
         $_SESSION['nivel_acesso'] = $nivel;
         $_SESSION['logged'] = $status; // $args['status'];        
     }
-    
     /**
      * Limpar Sessão
      */
@@ -25,8 +24,6 @@ class Helper {
         
         session_destroy();
     }
-
-
     /**
      * Verificar Sessão
      * 
@@ -44,5 +41,19 @@ class Helper {
         
         return false;
     }
-    
+    public static function randString($tam = 10){
+		$caracteres_validos = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$str = "";
+		$array = str_split($caracteres_validos, 1);
+		$tam_array = strlen($caracteres_validos);
+		for ($i = 0; $i < $tam; $i++){
+			$rand_i = rand(0, $tam_array - 1);
+			$str .= $array[$rand_i];
+		}	
+		
+		return $str;
+	}
+
+	
+
 }

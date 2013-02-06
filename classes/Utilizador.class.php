@@ -1,16 +1,24 @@
 <?php
 
 class Utilizador {
+    private $id;
     private $primeiro_nome;
     private $ultimo_nome;
     private $email;
     private $password;
     private $nivel_acesso;
     private $token;
+    private $estado;
+    private $url_imagem;
     private $data_criacao;
     private $data_alteracao;
-    private $estado;
     
+    function setId($id) {
+        $this->id = $id;
+    }
+    function getId() {
+        return $this->id;
+    }
     function setPrimeiroNome($primeiro_nome) {
         $this->primeiro_nome = $primeiro_nome;
     }
@@ -47,6 +55,18 @@ class Utilizador {
     function getToken() {
         return $this->token;
     }
+    function setEstado($estado) {
+        $this->estado = $estado;
+    }
+    function getEstado() {
+        return $this->estado;
+    }
+    function setUrlImagem($url_imagem) {
+        $this->url_imagem = $url_imagem;
+    }
+    function getUrlImagem() {
+        return $this->url_imagem;
+    }
     function setDataCriacao($data_criacao) {
         $this->data_criacao = $data_criacao;
     }
@@ -59,10 +79,5 @@ class Utilizador {
     function getDataAlteracao() {
         return $this->data_alteracao;
     }
-    function setEstado($estado) {
-        $this->estado = $estado;
-    }
-    function getEstado() {
-        return $this->estado;
-    }
+  
 }
