@@ -11,7 +11,7 @@ class CategoriaDAO extends Categoria {
         $conexao = new ConexaoDAO();
         
         $sqlText = "SELECT * FROM categorias WHERE id = {$id}";
-        $cat = $conexao->query($sqlText)->fetch();
+        $cat = $conexao->query($sqlText)->fetch(PDO::FETCH_OBJ);
         
         return $cat;
         
@@ -77,20 +77,25 @@ class CategoriaDAO extends Categoria {
         }
         
         return false;
-    }   
+    }
     
-    
-    
+    /**
+     * Editar Categoria
+     * 
+     * @param Categoria $categoria Categoria a ser editada
+     * @return bool
+     */
     public static function editarCategoria(Categoria $categoria){
         $conexao = new ConexaoDAO();
         
-        $sqlText ="UPDATE categorias SET nome=:nome, descricao=:descricao,  categoria_id=:categoria_id, url_imagem=:url_imagem, data_alteracao=:data_alteracao WHERE id = '{$id}'";
+        $sqlText ="UPDATE categorias SET nome=:nome, descricao=:descricao,  categoria_id=:categoria_id, url_imagem=:url_imagem, data_alteracao=:data_alteracao WHERE id = :id";
         $exec = $conexao->prepare($sqlText);
         $exec->bindValue(':nome', $categoria->getNome());
         $exec->bindValue(':descricao', $categoria->getDescricao());
         $exec->bindValue(':categoria_id', $categoria->getCategoriaId());
         $exec->bindValue(':url_imagem', $categoria->getUrlImagem());
         $exec->bindValue(':data_alteracao', $categoria->getDataAlteracao());
+        $exec->bindValue(':id', $categoria->getId());
         
         $resultado = $exec->execute();
         

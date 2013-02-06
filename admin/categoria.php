@@ -102,6 +102,47 @@
                 header("Location: categorias.php");
             }
             
+            if (isset($_POST['gravar']) && $_POST['gravar'] == "Actualizar"){
+                $n_nome = trim($_POST['nome']);
+                $n_descricao = trim($_POST['descricao']);
+                $data_alteracao = date('Y-m-d H:i:s');
+                
+                $nova_categoria = new Categoria();
+                $nova_categoria->setId($cat->id);
+                $nova_categoria->setNome($n_nome);
+                $nova_categoria->setDescricao($n_descricao);
+                $nova_categoria->setDataCriacao($cat->data_criacao);
+                $nova_categoria->setDataAlteracao($data_alteracao);
+                if ($_FILES['imagem']['error'] == 0){
+                    $new_file_name = date('YmdHis')."_".rand(100, 999).".".$ext; // Novo nome do ficheiro...
+                    $data_actual = date('Y-m-d H:i:s');
+                    move_uploaded_file($_FILES['imagem']['tmp_name'], PASTA_IMG_CATEGORIA . $new_file_name);
+                    $nova_categoria->setUrlImagem($new_file_name);
+                    
+                    if ($cat->url_imagem != "sem_imagem.png"){
+                        unlink(PASTA_IMG_CATEGORIA . $cat->url_imagem);
+                    }
+                } else {
+                    $nova_categoria->setUrlImagem($cat->url_imagem);
+                }
+                
+                $resultado = CategoriaDAO::editarCategoria($nova_categoria);
+                if ($resultado){
+                       $msgOk = "Categoria actualizada com sucesso.";
+                } else {
+                        $msgError = "Ocorreu um erro ao tentar actualizar a categoria.";
+                }
+            }   
+            
+            
+            
+            if (isset($msgError)){
+                echo "<div class='msg_error'>{$msgError}</div>";
+            }
+            
+            if (isset($msgOk)){
+                echo "<div class='msg_ok'>{$msgOk}</div>";
+            }
             ?>
             <form action="" method="post" enctype="multipart/form-data">
                 <fieldset>
