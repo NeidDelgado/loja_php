@@ -16,7 +16,6 @@ class CategoriaDAO extends Categoria {
         return $cat;
         
     }
-    
     /**
      * Retorna todas as categorias
      * 
@@ -31,7 +30,6 @@ class CategoriaDAO extends Categoria {
         
         return $resultado;
     }
-    
     /**
      * 
      * @param Categoria $categoria
@@ -39,7 +37,8 @@ class CategoriaDAO extends Categoria {
     public static function saveCategoria(Categoria $categoria){
         $conexao = new ConexaoDAO();
         
-        $sqlText = "INSERT INTO categorias (nome, descricao, categoria_id, url_imagem, data_criacao, data_alteracao) VALUES (:nome, :descricao, :categoria_id, :url_imagem, :data_criacao, :data_alteracao)";
+        $sqlText = "INSERT INTO categorias (nome, descricao, categoria_id, url_imagem, data_criacao, data_alteracao) 
+            VALUES (:nome, :descricao, :categoria_id, :url_imagem, :data_criacao, :data_alteracao)";
         $exec = $conexao->prepare($sqlText);
         $exec->bindValue(':nome', $categoria->getNome());
         $exec->bindValue(':descricao', $categoria->getDescricao());
@@ -77,6 +76,7 @@ class CategoriaDAO extends Categoria {
         }
         
         return false;
+
     }
     
     /**

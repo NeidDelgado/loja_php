@@ -7,7 +7,16 @@
     
     require_once 'header.php';
 ?>
+<script>  
+    function confirmaR(){
+        if(confirm("Deseja Eliminar a Categoria?"))       
+    {
+    return true;
+    }
+    return false;
 
+    }
+</script>
 <div class="content">
     <h1>Categorias</h1>
     
@@ -43,7 +52,7 @@
                         <td>
                             <a href='categoria.php?action=ver&id=" . $categoria['id'] . "' title='Ver Categoria'><img src='../img/icons/lupa16.png'></a>
                             <a href='categoria.php?action=editar&id=" . $categoria['id'] . "' title='Editar Categoria'><img src='../img/icons/page_edit16.png'></a>
-                            <a href='categoria.php?action=eliminar&id=" . $categoria['id'] . "' title='Eliminar Categoria'><img src='../img/icons/page_delete16.png'></a>                           
+                            <a href='categoria.php?action=eliminar&id=" . $categoria['id'] . "' title='Eliminar Categoria' onclick='return confirmaR()'><img src='../img/icons/page_delete16.png'></a>                           
                         </td>
                     </tr>";
                 }
